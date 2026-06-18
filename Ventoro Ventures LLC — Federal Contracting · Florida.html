@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ventoro Ventures LLC — Federal Contracting · Florida</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,700;0,900;1,400&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0A0D10;
+  --panel:#141A20;
+  --gold:#B8924A;
+  --gold-soft:#D8B978;
+  --paper:#E8E6DE;
+  --slate:#7C8893;
+  --offwhite:#DDD9D0;
+  --offwhite2:#D6D2C9;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--ink);color:var(--paper);font-family:'Inter',sans-serif;overflow-x:hidden;}
+
+/* ── NAV ── */
+#main-nav{
+  position:fixed;top:0;left:0;width:100%;z-index:1000;
+  height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;
+  background:rgba(10,13,16,0.92);
+  border-bottom:1px solid rgba(184,146,74,0.15);
+  /* NO backdrop-filter — this causes the glitch */
+}
+.nav-logo-wrap{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-logo-img{height:36px;width:auto;object-fit:contain;display:block;}
+.nav-wordmark{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;font-weight:500;letter-spacing:0.18em;
+  color:var(--paper);text-transform:uppercase;
+}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none;}
+.nav-links a{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;font-weight:500;letter-spacing:0.2em;
+  text-transform:uppercase;text-decoration:none;
+  color:var(--slate);
+  transition:color 0.25s;
+}
+.nav-links a:hover{color:var(--gold-soft);}
+.nav-cta{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;font-weight:500;letter-spacing:0.2em;
+  text-transform:uppercase;text-decoration:none;
+  padding:8px 20px;
+  border:1px solid rgba(184,146,74,0.4);
+  color:var(--gold-soft);
+  transition:background 0.25s,color 0.25s;
+}
+.nav-cta:hover{background:var(--gold);color:var(--ink);}
+
+/* ── SHARED ── */
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;letter-spacing:0.25em;
+  color:var(--gold-soft);text-transform:uppercase;
+  display:block;margin-bottom:20px;
+}
+.section-rule{
+  width:3px;background:linear-gradient(180deg,var(--gold) 0%,transparent 100%);
+  flex-shrink:0;align-self:stretch;
+}
+.manifest{
+  position:absolute;top:32px;right:40px;text-align:right;z-index:5;
+}
+.manifest .code{
+  font-family:'IBM Plex Mono',monospace;font-size:9px;
+  letter-spacing:0.15em;color:var(--gold-soft);
+  border:1px solid rgba(184,146,74,0.3);
+  padding:4px 10px;display:inline-block;
+  background:rgba(10,13,16,0.6);
+}
+.manifest .sub{
+  font-family:'IBM Plex Mono',monospace;font-size:8px;
+  color:var(--slate);margin-top:5px;letter-spacing:0.1em;line-height:1.5;
+}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.8s ease,transform 0.8s ease;}
+.reveal.visible{opacity:1;transform:none;}
+.d1{transition-delay:0.1s;}.d2{transition-delay:0.2s;}.d3{transition-delay:0.3s;}
+
+/* ── HERO ── */
+#hero{
+  position:relative;min-height:100vh;
+  display:flex;align-items:center;overflow:hidden;
+}
+.hero-video{position:absolute;inset:0;z-index:0;}
+.hero-video video{width:100%;height:100%;object-fit:cover;}
+.hero-veil{
+  position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(90deg,rgba(10,13,16,0.96) 0%,rgba(10,13,16,0.80) 50%,rgba(10,13,16,0.40) 100%),
+    linear-gradient(180deg,rgba(10,13,16,0.5) 0%,rgba(10,13,16,0.0) 40%,rgba(10,13,16,0.85) 100%);
+}
+.hero-content{
+  position:relative;z-index:2;
+  padding:120px 56px 100px;
+  max-width:700px;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:5px 14px;
+  border:1px solid rgba(184,146,74,0.3);
+  margin-bottom:32px;
+}
+.hero-tag-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:#5BE0A8;box-shadow:0 0 8px #5BE0A8;
+  animation:blink 2s infinite;
+}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.hero-tag-text{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:0.25em;
+  text-transform:uppercase;color:rgba(255,255,255,0.45);
+}
+.hero-h1{
+  font-family:'Archivo',sans-serif;
+  font-size:clamp(60px,9vw,112px);
+  font-weight:900;line-height:0.92;letter-spacing:-0.02em;
+  color:var(--paper);
+}
+.hero-h1 span{color:var(--gold);}
+.hero-sub{
+  font-size:16px;font-weight:300;line-height:1.8;
+  color:rgba(232,230,222,0.65);
+  max-width:480px;margin-top:28px;margin-bottom:44px;
+}
+.btn-primary{
+  display:inline-block;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;font-weight:500;letter-spacing:0.2em;
+  text-transform:uppercase;text-decoration:none;
+  padding:14px 32px;
+  background:var(--gold);color:var(--ink);
+  transition:background 0.25s,transform 0.2s;
+}
+.btn-primary:hover{background:var(--gold-soft);transform:translateY(-1px);}
+.btn-secondary{
+  display:inline-block;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;font-weight:500;letter-spacing:0.2em;
+  text-transform:uppercase;text-decoration:none;
+  padding:13px 32px;
+  border:1px solid rgba(232,230,222,0.2);color:rgba(232,230,222,0.7);
+  margin-left:12px;
+  transition:border-color 0.25s,color 0.25s;
+}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold);}
+.hero-stats{
+  position:absolute;right:0;top:50%;transform:translateY(-50%);z-index:2;
+  border-left:1px solid rgba(184,146,74,0.12);
+}
+.hero-stat{
+  padding:24px 36px;text-align:center;
+  border-bottom:1px solid rgba(184,146,74,0.08);
+}
+.hero-stat:last-child{border-bottom:none;}
+.stat-n{
+  font-family:'Archivo',sans-serif;font-weight:900;
+  font-size:38px;color:var(--gold-soft);line-height:1;
+}
+.stat-l{
+  font-family:'IBM Plex Mono',monospace;font-size:9px;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--slate);margin-top:4px;
+}
+.hero-scroll{
+  position:absolute;bottom:28px;left:56px;z-index:2;
+  display:flex;align-items:center;gap:10px;
+}
+.hero-scroll-line{width:36px;height:1px;background:var(--gold);opacity:0.35;}
+.hero-scroll-text{
+  font-family:'IBM Plex Mono',monospace;font-size:9px;
+  letter-spacing:0.3em;text-transform:uppercase;color:rgba(124,136,147,0.6);
+}
+
+/* ── VV-0002 MISSION with lighthouse bg ── */
+#mission{
+  position:relative;padding:120px 56px;
+  overflow:hidden;
+}
+.mission-bg{
+  position:absolute;inset:0;z-index:0;
+  background-image:url('lighthouse.jpg');
+  background-size:cover;background-position:center top;
+}
+.mission-bg-veil{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(90deg,rgba(10,13,16,0.88) 0%,rgba(10,13,16,0.70) 50%,rgba(10,13,16,0.35) 100%);
+}
+.mission-inner{position:relative;z-index:2;max-width:1100px;margin:0 auto;display:flex;gap:48px;}
+.mission-body{}
+.mission-h{
+  font-family:'Archivo',sans-serif;font-weight:700;
+  font-size:clamp(36px,4.5vw,60px);line-height:1.05;
+  color:var(--paper);margin-bottom:28px;
+}
+.mission-p{
+  font-size:16px;font-weight:300;line-height:1.9;
+  color:rgba(232,230,222,0.6);max-width:700px;margin-bottom:16px;
+}
+.mission-stats{display:flex;gap:56px;margin-top:48px;}
+.ms-num{
+  font-family:'Archivo',sans-serif;font-weight:900;
+  font-size:40px;color:var(--gold-soft);line-height:1;
+}
+.ms-lbl{
+  font-family:'IBM Plex Mono',monospace;font-size:9px;
+  letter-spacing:0.18em;text-transform:uppercase;color:var(--slate);
+  margin-top:6px;line-height:1.5;
+}
+
+/* ── VV-0003 ABOUT dark ── */
+#about{
+  position:relative;background:var(--ink);
+  padding:120px 56px;
+}
+.about-inner{max-width:1100px;margin:0 auto;display:flex;gap:48px;}
+.about-body{flex:1;}
+.about-h{
+  font-family:'Archivo',sans-serif;font-weight:700;
+  font-size:clamp(36px,4.5vw,58px);line-height:1.05;
+  color:var(--paper);margin-bottom:28px;
+}
+.about-p{font-size:15px;font-weight:300;line-height:1.9;color:rgba(232,230,222,0.6);margin-bottom:16px;}
+.about-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;}
+.about-card{border-top:1px solid rgba(184,146,74,0.25);padding-top:20px;}
+.about-card-t{
+  font-family:'Archivo',sans-serif;font-weight:700;
+  font-size:15px;color:var(--gold-soft);margin-bottom:10px;
+}
+.about-card-p{font-size:13px;font-weight:300;line-height:1.75;color:var(--slate);}
+
+/* ── VV-0004 SERVICES offwhite ── */
+#services{
+  position:relative;
+  background:var(--offwhite);
+  padding:120px 56px;
+}
+.services-inner{max-width:1100px;margin:0 auto;}
+.services-top{
+  display:flex;gap:48px;align-items:flex-end;
+  padding-bottom:48px;border-bottom:1px solid rgba(0,0,0,0.1);
+  margin-bottom:48px;
+}
+.services-h{
+  font-family:'Archivo',sans-serif;font-weight:700;
+  font-size:clamp(36px,4.5vw,58px);line-height:1.05;
+  color:var(--ink);flex:1;
+}
+.services-desc{font-size:14px;font-weight:300;line-height:1.8;color:#5A6573;max-width:340px;}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid rgba(0,0,0,0.08);border-left:1px solid rgba(0,0,0,0.08);}
+.svc{
+  border-bottom:1px solid rgba(0,0,0,0.08);border-right:1px solid rgba(0,0,0,0.08);
+  padding:32px 28px;
+  transition:background 0.25s;
+}
+.svc:hover{background:var(--ink);}
+.svc:hover .svc-n{color:rgba(255,255,255,0.08);}
+.svc:hover .svc-t{color:var(--paper);}
+.svc:hover .svc-p{color:rgba(232,230,222,0.5);}
+.svc:hover .svc-c{color:var(--gold-soft);}
+.svc-n{font-family:'IBM Plex Mono',monospace;font-size:32px;color:rgba(0,0,0,0.07);font-weight:500;line-height:1;margin-bottom:14px;transition:color 0.25s;}
+.svc-t{font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:0.04em;color:var(--ink);margin-bottom:10px;transition:color 0.25s;}
+.svc-p{font-size:13px;font-weight:300;line-height:1.75;color:#5A6573;margin-bottom:16px;transition:color 0.25s;}
+.svc-c{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;color:var(--gold);transition:color 0.25s;}
+
+/* ── VV-0005 NAICS dark ── */
+#naics{position:relative;background:var(--panel);padding:120px 56px;}
+.naics-inner{max-width:1100px;margin:0 auto;display:flex;gap:48px;}
+.naics-body{flex:1;}
+.naics-h{font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(36px,4.5vw,58px);line-height:1.05;color:var(--paper);margin-bottom:16px;}
+.naics-sub{font-size:14px;font-weight:300;line-height:1.8;color:var(--slate);max-width:560px;margin-bottom:48px;}
+.naics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.ncard{border:1px solid rgba(184,146,74,0.12);background:rgba(255,255,255,0.02);padding:18px 16px;transition:border-color 0.25s,background 0.25s;}
+.ncard:hover{border-color:rgba(184,146,74,0.45);background:rgba(184,146,74,0.04);}
+.ncard-num{font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:500;color:var(--gold-soft);margin-bottom:5px;}
+.ncard-desc{font-size:10px;font-weight:400;line-height:1.5;color:var(--slate);}
+
+/* ── VV-0006 CAPABILITY offwhite ── */
+#capability{position:relative;background:var(--offwhite2);padding:120px 56px;}
+.cap-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;}
+.cap-h{font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(32px,4vw,52px);line-height:1.05;color:var(--ink);margin-bottom:20px;}
+.cap-p{font-size:14px;font-weight:300;line-height:1.85;color:#5A6573;margin-bottom:16px;}
+.cap-box{background:var(--ink);padding:48px 40px;position:relative;}
+.cap-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),transparent);}
+.cap-box-title{font-family:'Archivo',sans-serif;font-weight:700;font-size:22px;color:var(--paper);margin-bottom:4px;}
+.cap-box-sub{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.18em;color:var(--slate);text-transform:uppercase;margin-bottom:28px;}
+.cap-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06);}
+.cap-row:last-of-type{border-bottom:none;margin-bottom:28px;}
+.cap-key{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);}
+.cap-val{font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(232,230,222,0.6);}
+.cap-val.active{color:#5BE0A8;}
+.btn-dl{
+  display:block;width:100%;
+  font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;
+  padding:14px;text-align:center;
+  background:var(--gold);color:var(--ink);border:none;cursor:pointer;
+  transition:background 0.25s;
+}
+.btn-dl:hover{background:var(--gold-soft);}
+.cap-note{font-family:'IBM Plex Mono',monospace;font-size:9px;text-align:center;color:var(--slate);margin-top:10px;}
+
+/* ── VV-0007 CONTACT dark ── */
+#contact{position:relative;background:var(--ink);padding:120px 56px 60px;}
+.contact-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;}
+.contact-h{font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(32px,4vw,52px);line-height:1.05;color:var(--paper);margin-bottom:16px;}
+.contact-p{font-size:14px;font-weight:300;line-height:1.85;color:var(--slate);margin-bottom:36px;}
+.cinfo{margin-bottom:22px;}
+.cinfo-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
+.cinfo-val{font-size:13px;font-weight:300;color:rgba(232,230,222,0.65);text-decoration:none;display:block;transition:color 0.2s;}
+.cinfo-val:hover{color:var(--gold-soft);}
+.field{margin-bottom:20px;}
+.field label{display:block;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--slate);margin-bottom:8px;}
+.field input,.field textarea{
+  width:100%;background:transparent;
+  border-bottom:1px solid rgba(124,136,147,0.35);
+  padding:8px 0;font-family:'Inter',sans-serif;font-size:14px;
+  color:var(--paper);outline:none;
+  transition:border-color 0.25s;resize:none;
+}
+.field input:focus,.field textarea:focus{border-color:var(--gold);}
+.field input::placeholder,.field textarea::placeholder{color:var(--slate);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.btn-submit{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;
+  padding:13px 30px;background:var(--panel);color:var(--paper);
+  border:1px solid rgba(232,230,222,0.15);cursor:pointer;
+  transition:background 0.25s,color 0.25s,border-color 0.25s;
+}
+.btn-submit:hover{background:var(--gold);color:var(--ink);border-color:var(--gold);}
+.form-confirm{display:none;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.15em;color:var(--gold-soft);margin-top:14px;}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--ink);
+  padding:24px 56px;
+  border-top:1px solid rgba(184,146,74,0.1);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;
+}
+.footer-logo{display:flex;align-items:center;gap:10px;}
+.footer-logo img{height:28px;width:auto;object-fit:contain;}
+.footer-name{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.18em;color:rgba(232,230,222,0.4);text-transform:uppercase;}
+.footer-copy{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;color:var(--slate);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  #main-nav{padding:0 20px;}
+  .nav-links,.nav-cta{display:none;}
+  .hero-content{padding:100px 24px 80px;}
+  .hero-stats{display:none;}
+  #mission,#about,#services,#naics,#capability,#contact{padding:80px 24px;}
+  .mission-inner,.about-inner,.naics-inner{flex-direction:column;gap:32px;}
+  .about-cards{grid-template-columns:1fr;}
+  .services-top{flex-direction:column;gap:20px;}
+  .services-grid{grid-template-columns:1fr;}
+  .naics-grid{grid-template-columns:1fr 1fr;}
+  .cap-inner,.contact-inner{grid-template-columns:1fr;gap:40px;}
+  footer{padding:20px 24px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<header id="main-nav">
+  <a href="#hero" class="nav-logo-wrap">
+    <img src="logo.png" alt="Ventoro Ventures" class="nav-logo-img"/>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#mission">Mission</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#naics">NAICS</a></li>
+    <li><a href="#capability">Capability</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Inquire</a>
+</header>
+
+<!-- ── HERO VV-0001 ── -->
+<section id="hero">
+  <div class="hero-video">
+    <video autoplay muted loop playsinline>
+      <source src="hero.mp4" type="video/mp4"/>
+    </video>
+  </div>
+  <div class="hero-veil"></div>
+
+  <div class="hero-content reveal visible">
+    <div class="hero-tag">
+      <div class="hero-tag-dot"></div>
+      <span class="hero-tag-text">SAM.gov Registered · Florida Small Business</span>
+    </div>
+    <h1 class="hero-h1">VENTORO<br/><span>VENTURES</span></h1>
+    <p class="hero-sub">A Florida-based federal and state contractor — coordinating supplies, services, and logistics for government agencies across the United States.</p>
+    <div>
+      <a href="#services" class="btn-primary">Our Services</a>
+      <a href="#contact" class="btn-secondary">Contracting Officers →</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="stat-n">12</div>
+      <div class="stat-l">NAICS<br/>Codes</div>
+    </div>
+    <div class="hero-stat">
+      <div class="stat-n">FL</div>
+      <div class="stat-l">State of<br/>Formation</div>
+    </div>
+    <div class="hero-stat">
+      <div class="stat-n">SB</div>
+      <div class="stat-l">Small<br/>Business</div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span class="hero-scroll-text">Scroll</span>
+  </div>
+</section>
+
+<!-- ── MISSION VV-0002 — lighthouse bg ── -->
+<section id="mission">
+  <div class="mission-bg"></div>
+  <div class="mission-bg-veil"></div>
+  <div class="manifest">
+    <span class="code">DOC // VV-0002</span>
+    <div class="sub">CLASS: MISSION STATEMENT</div>
+  </div>
+  <div class="mission-inner">
+    <div class="section-rule"></div>
+    <div class="mission-body">
+      <span class="eyebrow reveal">Our Purpose</span>
+      <h2 class="mission-h reveal d1">Bridge the gap between government need and proven execution.</h2>
+      <p class="mission-p reveal d2">Ventoro Ventures exists to take on the complexity of government contracting so agencies get results — not red tape. We source qualified subcontractors, coordinate logistics, and manage every detail from bid to delivery.</p>
+      <p class="mission-p reveal d2">One firm. Every job. No friction.</p>
+      <div class="mission-stats reveal d3">
+        <div>
+          <div class="ms-num">FL</div>
+          <div class="ms-lbl">Florida<br/>Headquarters</div>
+        </div>
+        <div>
+          <div class="ms-num">50</div>
+          <div class="ms-lbl">States We<br/>Operate In</div>
+        </div>
+        <div>
+          <div class="ms-num">12</div>
+          <div class="ms-lbl">Active NAICS<br/>Codes</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHO WE ARE VV-0003 dark ── -->
+<section id="about">
+  <div class="manifest">
+    <span class="code">DOC // VV-0003</span>
+    <div class="sub">CLASS: CORPORATE PROFILE</div>
+  </div>
+  <div class="about-inner">
+    <div class="section-rule"></div>
+    <div class="about-body">
+      <span class="eyebrow reveal">Who We Are</span>
+      <h2 class="about-h reveal d1">Built to execute.<br/>Wired for the government.</h2>
+      <p class="about-p reveal d2">Ventoro Ventures LLC is a Florida-based small business and registered vendor on SAM.gov and MyFloridaMarketplace — positioned to serve federal, state, county, and local government agencies across every service category we operate in.</p>
+      <p class="about-p reveal d2">We are the middlemen who make it work. We win the contract, source the right subcontractors, manage the paperwork, and deliver on time. When a contracting officer reaches out to Ventoro Ventures, they speak directly with a founder — no layers, no delays.</p>
+      <div class="about-cards reveal d3">
+        <div class="about-card">
+          <div class="about-card-t">Florida Based</div>
+          <p class="about-card-p">Headquartered in Jupiter, Florida. Registered on MyFloridaMarketplace for state and local contracts across all 67 counties.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-card-t">Small Business Certified</div>
+          <p class="about-card-p">Registered under SBA size standards. Eligible for micro-purchase awards, simplified acquisitions, and small business set-asides.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-card-t">Founder Direct</div>
+          <p class="about-card-p">Every contracting officer speaks directly with a founder. Fast responses and clean documentation on every contract we execute.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES VV-0004 offwhite ── -->
+<section id="services">
+  <div class="manifest" style="right:40px;top:32px;">
+    <span class="code" style="color:#B8924A;border-color:rgba(184,146,74,0.3);background:rgba(240,237,230,0.85);">DOC // VV-0004</span>
+    <div class="sub" style="color:#8896A8;">DIVISION: SERVICE AREAS</div>
+  </div>
+  <div class="services-inner">
+    <div class="services-top">
+      <div>
+        <span class="eyebrow reveal" style="color:var(--gold);">What We Do</span>
+        <h2 class="services-h reveal d1">Six service areas.<br/>Every level of government.</h2>
+      </div>
+      <p class="services-desc reveal d2">Federal, state, county, and local agencies — we are a registered vendor across all levels, covering the full range of procurement needs we fulfill.</p>
+    </div>
+    <div class="services-grid">
+      <div class="svc reveal">
+        <div class="svc-n">01</div>
+        <div class="svc-t">Facilities & Janitorial</div>
+        <p class="svc-p">Commercial cleaning, facility maintenance, carpet cleaning, painting, and groundskeeping for government buildings.</p>
+        <div class="svc-c">561720 · 561730 · 561740 · 561210</div>
+      </div>
+      <div class="svc reveal d1">
+        <div class="svc-n">02</div>
+        <div class="svc-t">Administrative Support</div>
+        <p class="svc-p">Office administrative services, document preparation, data entry, and business support for agency operations.</p>
+        <div class="svc-c">561110 · 561410 · 561499</div>
+      </div>
+      <div class="svc reveal d2">
+        <div class="svc-n">03</div>
+        <div class="svc-t">Logistics & Freight</div>
+        <p class="svc-p">Local freight trucking, courier delivery, moving services, and packing and crating for government relocations.</p>
+        <div class="svc-c">484110 · 492110 · 488991</div>
+      </div>
+      <div class="svc reveal d1">
+        <div class="svc-n">04</div>
+        <div class="svc-t">Bulk Supply & Materials</div>
+        <p class="svc-p">Agricultural materials, bulk goods, general durable supplies, and wholesale merchandise sourced and delivered.</p>
+        <div class="svc-c">423990 · 424590</div>
+      </div>
+      <div class="svc reveal d2">
+        <div class="svc-n">05</div>
+        <div class="svc-t">General Labor & Site</div>
+        <p class="svc-p">Site preparation, field labor, building inspection, and miscellaneous support for federal and state facilities.</p>
+        <div class="svc-c">561990</div>
+      </div>
+      <div class="svc reveal d3">
+        <div class="svc-n">06</div>
+        <div class="svc-t">Moving & Relocation</div>
+        <p class="svc-p">Household and office goods moving, packing, crating, and full relocation coordination for government personnel.</p>
+        <div class="svc-c">484210 · 488991</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── NAICS VV-0005 dark ── -->
+<section id="naics">
+  <div class="manifest">
+    <span class="code">DOC // VV-0005</span>
+    <div class="sub">CLASS: NAICS REGISTRATION<br/>COUNT: 12 ACTIVE</div>
+  </div>
+  <div class="naics-inner">
+    <div class="section-rule"></div>
+    <div class="naics-body">
+      <span class="eyebrow reveal">Registered Codes</span>
+      <h2 class="naics-h reveal d1">12 active NAICS codes.<br/>SAM.gov & MFMP verified.</h2>
+      <p class="naics-sub reveal d2">Contracting officers can verify our registration directly on SAM.gov and MyFloridaMarketplace. All 12 codes are active across federal, state, county, and local procurement systems.</p>
+      <div class="naics-grid reveal d2">
+        <div class="ncard"><div class="ncard-num">561720</div><div class="ncard-desc">Janitorial Services</div></div>
+        <div class="ncard"><div class="ncard-num">561730</div><div class="ncard-desc">Landscaping Services</div></div>
+        <div class="ncard"><div class="ncard-num">561740</div><div class="ncard-desc">Carpet & Upholstery Cleaning</div></div>
+        <div class="ncard"><div class="ncard-num">561210</div><div class="ncard-desc">Facilities Support Services</div></div>
+        <div class="ncard"><div class="ncard-num">561990</div><div class="ncard-desc">All Other Support Services</div></div>
+        <div class="ncard"><div class="ncard-num">561110</div><div class="ncard-desc">Office Administrative Services</div></div>
+        <div class="ncard"><div class="ncard-num">561499</div><div class="ncard-desc">Business Support Services</div></div>
+        <div class="ncard"><div class="ncard-num">484110</div><div class="ncard-desc">General Freight Trucking Local</div></div>
+        <div class="ncard"><div class="ncard-num">492110</div><div class="ncard-desc">Couriers & Express Delivery</div></div>
+        <div class="ncard"><div class="ncard-num">488991</div><div class="ncard-desc">Packing & Crating</div></div>
+        <div class="ncard"><div class="ncard-num">423990</div><div class="ncard-desc">Other Durable Goods Wholesalers</div></div>
+        <div class="ncard"><div class="ncard-num">424590</div><div class="ncard-desc">Agricultural & Bulk Materials</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CAPABILITY VV-0006 offwhite ── -->
+<section id="capability">
+  <div class="manifest" style="right:40px;top:32px;">
+    <span class="code" style="color:#B8924A;border-color:rgba(184,146,74,0.3);background:rgba(232,229,222,0.85);">DOC // VV-0006</span>
+    <div class="sub" style="color:#8896A8;">CLASS: CAPABILITY STATEMENT<br/>FORMAT: PDF ON REQUEST</div>
+  </div>
+  <div class="cap-inner">
+    <div>
+      <span class="eyebrow reveal" style="color:var(--gold);">Capability Statement</span>
+      <h2 class="cap-h reveal d1">Everything a contracting officer needs in one document.</h2>
+      <p class="cap-p reveal d2">Our capability statement gives procurement teams a complete overview of Ventoro Ventures — core competencies, all 12 NAICS codes, SAM.gov and MFMP registration status, and direct contact information.</p>
+      <p class="cap-p reveal d2">Available for immediate download below or by contacting us directly at info@ventoroventures.com.</p>
+    </div>
+    <div class="cap-box reveal d2">
+      <div class="cap-box-title">VENTORO VENTURES LLC</div>
+      <div class="cap-box-sub">Capability Statement · 2026</div>
+      <div class="cap-row"><span class="cap-key">Entity</span><span class="cap-val">Ventoro Ventures LLC</span></div>
+      <div class="cap-row"><span class="cap-key">State</span><span class="cap-val">Florida, USA</span></div>
+      <div class="cap-row"><span class="cap-key">SAM.gov</span><span class="cap-val">Pending Activation</span></div>
+      <div class="cap-row"><span class="cap-key">MFMP</span><span class="cap-val active">Active Vendor</span></div>
+      <div class="cap-row"><span class="cap-key">Type</span><span class="cap-val">Small Business LLC</span></div>
+      <div class="cap-row"><span class="cap-key">NAICS</span><span class="cap-val">12 Active Codes</span></div>
+      <button class="btn-dl" onclick="alert('Capability statement available at info@ventoroventures.com')">Download PDF</button>
+      <p class="cap-note">Or email info@ventoroventures.com</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT VV-0007 dark ── -->
+<section id="contact">
+  <div class="manifest">
+    <span class="code">DOC // VV-0007</span>
+    <div class="sub">CLASS: CONTACT / OUTREACH</div>
+  </div>
+  <div class="contact-inner">
+    <div>
+      <span class="eyebrow reveal">Contracting Inquiries</span>
+      <h2 class="contact-h reveal d1">Let's put a contract together.</h2>
+      <p class="contact-p reveal d2">Contracting officers, agency representatives, and procurement teams — reach us directly. We respond within one business day.</p>
+      <div class="reveal d2">
+        <div class="cinfo">
+          <div class="cinfo-lbl">General Inquiries</div>
+          <a href="mailto:info@ventoroventures.com" class="cinfo-val">info@ventoroventures.com</a>
+        </div>
+        <div class="cinfo">
+          <div class="cinfo-lbl">Co-Founder — Operations</div>
+          <a href="mailto:robert@ventoroventures.com" class="cinfo-val">robert@ventoroventures.com</a>
+        </div>
+        <div class="cinfo">
+          <div class="cinfo-lbl">Co-Founder — Operations</div>
+          <a href="mailto:julian@ventoroventures.com" class="cinfo-val">julian@ventoroventures.com</a>
+        </div>
+        <div class="cinfo">
+          <div class="cinfo-lbl">Location</div>
+          <span class="cinfo-val">Jupiter, Florida · Operating Nationwide</span>
+        </div>
+      </div>
+    </div>
+    <form onsubmit="handleSubmit(event)" class="reveal d2">
+      <div class="form-row">
+        <div class="field"><label>First Name</label><input type="text" placeholder="John" required/></div>
+        <div class="field"><label>Last Name</label><input type="text" placeholder="Smith"/></div>
+      </div>
+      <div class="field"><label>Email</label><input type="email" placeholder="name@agency.gov" required/></div>
+      <div class="field"><label>Agency or Organization</label><input type="text" placeholder="e.g. GSA, VA, State of Florida"/></div>
+      <div class="field"><label>Contracting Need</label><textarea rows="3" placeholder="Describe your requirement..."></textarea></div>
+      <button type="submit" class="btn-submit">Submit Inquiry</button>
+      <p class="form-confirm">Received. We'll follow up within one business day.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">
+    <img src="logo.png" alt="Ventoro Ventures"/>
+    <span class="footer-name">Ventoro Ventures LLC</span>
+  </div>
+  <span class="footer-copy">© 2026 Ventoro Ventures LLC · Jupiter, Florida · SAM.gov Registered · MyFloridaMarketplace Active</span>
+</footer>
+
+<script>
+// ── Scroll reveal ──
+const revealEls = document.querySelectorAll('.reveal:not(.visible)');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+revealEls.forEach(el => io.observe(el));
+
+// ── Nav active highlight ──
+const sections = document.querySelectorAll('section[id]');
+const navAs = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if(window.scrollY >= s.offsetTop - 80) cur = s.id; });
+  navAs.forEach(a => { a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--gold-soft)' : ''; });
+}, { passive: true });
+
+// ── Form ──
+function handleSubmit(e) {
+  e.preventDefault();
+  const confirm = e.target.querySelector('.form-confirm');
+  confirm.style.display = 'block';
+  setTimeout(() => { confirm.style.display = 'none'; e.target.reset(); }, 4000);
+}
+</script>
+</body>
+</html>
