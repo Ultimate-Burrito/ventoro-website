@@ -5,20 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ventoro Ventures LLC — Federal Contracting</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap');
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy:   #0E1E3D;
-      --navy2:  #162847;
-      --gold:   #C9A84C;
-      --gold2:  #E8C96A;
-      --off:    #F5F3EE;
-      --white:  #FFFFFF;
-      --gray:   #8A8F9A;
-      --text:   #1A1A2E;
-      --light:  #EAE8E2;
+      --navy:  #0B1829;
+      --navy2: #0F2035;
+      --gold:  #C9A84C;
+      --gold2: #E2C06A;
+      --white: #FFFFFF;
+      --off:   #F6F4F0;
+      --light: #EAE7E1;
+      --mid:   #8896A8;
+      --text:  #1A2332;
+      --border:#D4D0C8;
     }
 
     html { scroll-behavior: smooth; }
@@ -30,407 +31,512 @@
       overflow-x: hidden;
     }
 
-    /* ── NAV ── */
+    /* ─── NAV ─── */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: 68px;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 60px;
-      height: 72px;
-      background: rgba(14,30,61,0.97);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(201,168,76,0.2);
+      padding: 0 56px;
+      background: rgba(11,24,41,0.96);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(201,168,76,0.18);
     }
 
-    .nav-logo {
-      display: flex; align-items: center; gap: 14px;
-      text-decoration: none;
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+
+    /* VV shield mark */
+    .nav-shield {
+      width: 36px; height: 36px;
+      background: var(--gold);
+      clip-path: polygon(50% 0%, 100% 15%, 100% 65%, 50% 100%, 0% 65%, 0% 15%);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
     }
 
-    .nav-logo svg { width: 38px; height: 38px; }
+    .nav-shield span {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 15px; color: var(--navy); letter-spacing: 1px;
+    }
 
-    .nav-brand {
+    .nav-wordmark {
       display: flex; flex-direction: column; line-height: 1.1;
     }
 
-    .nav-brand-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 18px; font-weight: 700;
-      color: var(--white); letter-spacing: 1.5px;
+    .nav-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px; letter-spacing: 2px;
+      color: var(--white);
     }
 
-    .nav-brand-sub {
-      font-size: 9px; font-weight: 500;
-      color: var(--gold); letter-spacing: 3px;
-      text-transform: uppercase;
+    .nav-sub {
+      font-size: 8px; font-weight: 500; letter-spacing: 3.5px;
+      text-transform: uppercase; color: var(--gold);
     }
 
-    .nav-links {
-      display: flex; align-items: center; gap: 36px;
-      list-style: none;
-    }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
 
     .nav-links a {
-      font-size: 12px; font-weight: 500; letter-spacing: 2px;
+      font-size: 11px; font-weight: 600; letter-spacing: 2px;
       text-transform: uppercase; text-decoration: none;
-      color: rgba(255,255,255,0.7);
-      transition: color 0.2s;
+      color: rgba(255,255,255,0.55); transition: color 0.2s;
     }
 
     .nav-links a:hover { color: var(--gold); }
 
     .nav-cta {
-      padding: 9px 24px;
-      border: 1px solid var(--gold);
-      color: var(--gold) !important;
-      border-radius: 2px;
-      transition: background 0.2s, color 0.2s !important;
-    }
-
-    .nav-cta:hover {
+      padding: 8px 22px !important;
       background: var(--gold) !important;
       color: var(--navy) !important;
+      border-radius: 2px;
     }
 
-    /* ── HERO ── */
+    .nav-cta:hover { background: var(--gold2) !important; color: var(--navy) !important; }
+
+    /* ─── HERO WITH VIDEO ─── */
     #hero {
+      position: relative;
       min-height: 100vh;
-      background: var(--navy);
       display: flex; align-items: center;
-      position: relative; overflow: hidden;
-      padding: 120px 60px 80px;
+      overflow: hidden;
     }
 
-    .hero-grid {
-      position: absolute; inset: 0; opacity: 0.04;
-      background-image:
-        linear-gradient(var(--gold) 1px, transparent 1px),
-        linear-gradient(90deg, var(--gold) 1px, transparent 1px);
-      background-size: 60px 60px;
+    .hero-video-wrap {
+      position: absolute; inset: 0; z-index: 0;
     }
 
-    .hero-glow {
-      position: absolute; top: -200px; right: -200px;
-      width: 700px; height: 700px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
-      pointer-events: none;
+    .hero-video-wrap video {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+    }
+
+    /* Multi-layer overlay: navy left fade + dark overall */
+    .hero-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background:
+        linear-gradient(90deg, rgba(11,24,41,0.97) 0%, rgba(11,24,41,0.88) 45%, rgba(11,24,41,0.5) 100%),
+        linear-gradient(180deg, rgba(11,24,41,0.3) 0%, rgba(11,24,41,0.15) 50%, rgba(11,24,41,0.6) 100%);
     }
 
     .hero-content {
       position: relative; z-index: 2;
-      max-width: 760px;
+      padding: 140px 56px 120px;
+      max-width: 680px;
     }
 
-    .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: 10px;
-      margin-bottom: 32px;
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px;
+      border: 1px solid rgba(201,168,76,0.35);
+      border-radius: 2px;
+      margin-bottom: 36px;
     }
 
-    .hero-eyebrow-line {
-      width: 40px; height: 1px; background: var(--gold);
+    .hero-tag-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #5BE0A8;
+      box-shadow: 0 0 8px #5BE0A8;
+      animation: pulse 2s infinite;
     }
 
-    .hero-eyebrow-text {
-      font-size: 11px; font-weight: 500; letter-spacing: 4px;
-      text-transform: uppercase; color: var(--gold);
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .hero-tag-text {
+      font-size: 10px; font-weight: 600; letter-spacing: 3px;
+      text-transform: uppercase; color: rgba(255,255,255,0.5);
     }
 
     .hero-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(52px, 7vw, 86px);
-      font-weight: 700; line-height: 1.0;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(64px, 8vw, 110px);
+      line-height: 0.92; letter-spacing: 2px;
       color: var(--white);
-      margin-bottom: 28px;
+      margin-bottom: 8px;
     }
 
-    .hero-title span {
+    .hero-title-gold {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(64px, 8vw, 110px);
+      line-height: 0.92; letter-spacing: 2px;
       color: var(--gold);
-      font-style: italic;
+      display: block; margin-bottom: 32px;
     }
 
     .hero-sub {
-      font-size: 16px; font-weight: 300; line-height: 1.8;
-      color: rgba(255,255,255,0.65);
-      max-width: 540px; margin-bottom: 48px;
+      font-size: 15px; font-weight: 300; line-height: 1.85;
+      color: rgba(255,255,255,0.55);
+      max-width: 480px; margin-bottom: 48px;
     }
 
-    .hero-actions {
-      display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
-    }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
 
-    .btn-primary {
-      padding: 15px 36px;
-      background: var(--gold);
-      color: var(--navy);
-      font-size: 12px; font-weight: 600; letter-spacing: 2px;
+    .btn-gold {
+      padding: 14px 34px;
+      background: var(--gold); color: var(--navy);
+      font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
       text-transform: uppercase; text-decoration: none;
-      border-radius: 2px;
+      border-radius: 2px; display: inline-block;
       transition: background 0.2s, transform 0.15s;
-      display: inline-block;
     }
 
-    .btn-primary:hover {
-      background: var(--gold2);
-      transform: translateY(-1px);
-    }
+    .btn-gold:hover { background: var(--gold2); transform: translateY(-1px); }
 
-    .btn-ghost {
-      padding: 14px 36px;
-      border: 1px solid rgba(255,255,255,0.25);
-      color: rgba(255,255,255,0.8);
-      font-size: 12px; font-weight: 500; letter-spacing: 2px;
+    .btn-outline {
+      padding: 13px 34px;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.7);
+      font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
       text-transform: uppercase; text-decoration: none;
-      border-radius: 2px;
+      border-radius: 2px; display: inline-block;
       transition: border-color 0.2s, color 0.2s;
-      display: inline-block;
     }
 
-    .btn-ghost:hover {
-      border-color: var(--gold);
-      color: var(--gold);
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* Scroll indicator */
+    .hero-scroll {
+      position: absolute; bottom: 32px; left: 56px; z-index: 2;
+      display: flex; align-items: center; gap: 12px;
     }
 
+    .hero-scroll-line {
+      width: 40px; height: 1px; background: var(--gold); opacity: 0.4;
+    }
+
+    .hero-scroll-text {
+      font-size: 9px; font-weight: 600; letter-spacing: 3px;
+      text-transform: uppercase; color: rgba(255,255,255,0.25);
+    }
+
+    /* Stats strip on right of hero */
     .hero-stats {
-      position: absolute; right: 60px; bottom: 80px;
-      display: flex; gap: 48px; z-index: 2;
+      position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+      z-index: 2;
+      display: flex; flex-direction: column;
+      border-left: 1px solid rgba(201,168,76,0.15);
     }
 
-    .hero-stat { text-align: right; }
-
-    .hero-stat-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 36px; font-weight: 700;
-      color: var(--gold); line-height: 1;
+    .hero-stat {
+      padding: 28px 40px;
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+      text-align: center;
     }
 
-    .hero-stat-label {
-      font-size: 10px; font-weight: 500; letter-spacing: 2px;
+    .hero-stat:last-child { border-bottom: none; }
+
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 42px; color: var(--gold); line-height: 1;
+      letter-spacing: 1px;
+    }
+
+    .stat-label {
+      font-size: 9px; font-weight: 600; letter-spacing: 2px;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-      margin-top: 4px;
+      color: rgba(255,255,255,0.3); margin-top: 4px;
     }
 
-    /* ── ABOUT ── */
+    /* ─── MISSION ─── */
+    #mission {
+      padding: 100px 56px;
+      background: var(--navy2);
+      position: relative; overflow: hidden;
+    }
+
+    .mission-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 2fr; gap: 80px;
+      align-items: center;
+    }
+
+    .mission-left {
+      border-right: 1px solid rgba(201,168,76,0.15);
+      padding-right: 80px;
+    }
+
+    .eyebrow {
+      font-size: 10px; font-weight: 600; letter-spacing: 4px;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 20px;
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .eyebrow::before {
+      content: ''; width: 20px; height: 1px; background: var(--gold);
+    }
+
+    .mission-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 56px; letter-spacing: 2px; line-height: 0.95;
+      color: var(--white);
+    }
+
+    .mission-heading span { color: var(--gold); }
+
+    .mission-statement {
+      font-size: 18px; font-weight: 300; line-height: 1.85;
+      color: rgba(255,255,255,0.65);
+    }
+
+    .mission-statement strong {
+      color: var(--gold); font-weight: 500;
+    }
+
+    /* ─── WHO WE ARE ─── */
     #about {
-      padding: 120px 60px;
+      padding: 100px 56px;
       background: var(--white);
     }
 
     .about-inner {
       max-width: 1100px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
-      align-items: center;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 72px;
+      align-items: start;
     }
 
-    .section-label {
-      font-size: 10px; font-weight: 600; letter-spacing: 4px;
-      text-transform: uppercase; color: var(--gold);
-      margin-bottom: 16px;
-      display: flex; align-items: center; gap: 10px;
-    }
-
-    .section-label::before {
-      content: ''; width: 24px; height: 1px; background: var(--gold);
-    }
-
-    .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(36px, 4vw, 52px);
-      font-weight: 700; line-height: 1.1;
+    .section-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 4.5vw, 60px);
+      letter-spacing: 2px; line-height: 0.95;
       color: var(--navy); margin-bottom: 24px;
     }
 
-    .section-body {
+    .section-heading span { color: var(--gold); }
+
+    .body-text {
       font-size: 15px; font-weight: 300; line-height: 1.9;
-      color: #555; margin-bottom: 20px;
+      color: #5A6778; margin-bottom: 18px;
     }
 
-    .about-right {
-      display: flex; flex-direction: column; gap: 24px;
+    .about-cards { display: flex; flex-direction: column; gap: 0; }
+
+    .about-item {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex; gap: 20px;
     }
 
-    .about-card {
-      padding: 28px 32px;
-      border-left: 3px solid var(--gold);
-      background: var(--off);
+    .about-item:first-child { border-top: 1px solid var(--border); }
+
+    .about-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px; color: var(--gold);
+      line-height: 1; flex-shrink: 0; width: 40px;
+      opacity: 0.5;
     }
 
-    .about-card-title {
-      font-size: 13px; font-weight: 600; letter-spacing: 1px;
-      color: var(--navy); margin-bottom: 8px;
-      text-transform: uppercase;
+    .about-item-title {
+      font-size: 13px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--navy);
+      margin-bottom: 6px;
     }
 
-    .about-card-text {
-      font-size: 14px; font-weight: 300; line-height: 1.7; color: #666;
+    .about-item-text {
+      font-size: 13px; font-weight: 300; line-height: 1.75; color: #6B7C93;
     }
 
-    /* ── SERVICES ── */
+    /* ─── WHAT WE DO ─── */
     #services {
-      padding: 120px 60px;
+      padding: 100px 56px;
       background: var(--off);
     }
 
     .services-inner { max-width: 1100px; margin: 0 auto; }
 
-    .services-header { text-align: center; margin-bottom: 72px; }
+    .services-top {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+      align-items: end; margin-bottom: 56px;
+      padding-bottom: 48px; border-bottom: 1px solid var(--border);
+    }
+
+    .services-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 4.5vw, 60px);
+      letter-spacing: 2px; line-height: 0.95;
+      color: var(--navy);
+    }
+
+    .services-heading span { color: var(--gold); }
+
+    .services-desc {
+      font-size: 14px; font-weight: 300; line-height: 1.8; color: #6B7C93;
+    }
 
     .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
     }
 
-    .service-card {
+    .svc {
       background: var(--white);
-      padding: 44px 36px;
+      padding: 36px 28px 32px;
       position: relative; overflow: hidden;
-      transition: transform 0.2s;
+      transition: background 0.25s;
+      cursor: default;
     }
 
-    .service-card:hover { transform: translateY(-4px); }
+    .svc:hover { background: var(--navy); }
+    .svc:hover .svc-title { color: var(--white); }
+    .svc:hover .svc-text { color: rgba(255,255,255,0.45); }
+    .svc:hover .svc-codes { color: var(--gold); opacity: 0.7; }
+    .svc:hover .svc-num { color: rgba(255,255,255,0.08); }
 
-    .service-card::after {
-      content: ''; position: absolute;
-      bottom: 0; left: 0; right: 0; height: 3px;
-      background: var(--gold);
-      transform: scaleX(0); transform-origin: left;
-      transition: transform 0.3s;
+    .svc-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px; color: var(--light);
+      line-height: 1; margin-bottom: 16px;
+      transition: color 0.25s;
     }
 
-    .service-card:hover::after { transform: scaleX(1); }
-
-    .service-icon {
-      width: 48px; height: 48px; margin-bottom: 24px;
-      display: flex; align-items: center; justify-content: center;
+    .svc-title {
+      font-size: 14px; font-weight: 700; letter-spacing: 0.5px;
+      color: var(--navy); margin-bottom: 10px;
+      text-transform: uppercase;
+      transition: color 0.25s;
     }
 
-    .service-icon svg { width: 32px; height: 32px; }
-
-    .service-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px; font-weight: 700;
-      color: var(--navy); margin-bottom: 12px;
+    .svc-text {
+      font-size: 13px; font-weight: 300; line-height: 1.75;
+      color: #6B7C93; margin-bottom: 18px;
+      transition: color 0.25s;
     }
 
-    .service-text {
-      font-size: 14px; font-weight: 300; line-height: 1.8; color: #666;
-      margin-bottom: 20px;
-    }
-
-    .service-naics {
-      font-size: 10px; font-weight: 600; letter-spacing: 2px;
+    .svc-codes {
+      font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
       color: var(--gold); text-transform: uppercase;
+      transition: color 0.25s, opacity 0.25s;
     }
 
-    /* ── CAPABILITY STATEMENT ── */
-    #capability {
-      padding: 100px 60px;
+    /* ─── NAICS CODES ─── */
+    #codes {
+      padding: 100px 56px;
       background: var(--navy);
-      position: relative; overflow: hidden;
+      position: relative;
     }
 
-    .capability-glow {
-      position: absolute; top: -200px; right: -200px;
-      width: 600px; height: 600px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
-      pointer-events: none;
+    .codes-inner { max-width: 1100px; margin: 0 auto; }
+
+    .codes-top {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+      align-items: end; margin-bottom: 56px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .codes-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 4.5vw, 60px);
+      letter-spacing: 2px; line-height: 0.95;
+      color: var(--white);
+    }
+
+    .codes-heading span { color: var(--gold); }
+
+    .codes-desc {
+      font-size: 14px; font-weight: 300; line-height: 1.8;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .codes-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    }
+
+    .code-item {
+      padding: 20px 18px;
+      border: 1px solid rgba(201,168,76,0.12);
+      background: rgba(255,255,255,0.02);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .code-item:hover {
+      border-color: rgba(201,168,76,0.4);
+      background: rgba(201,168,76,0.04);
+    }
+
+    .code-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px; color: var(--gold);
+      letter-spacing: 1px; margin-bottom: 6px;
+    }
+
+    .code-desc {
+      font-size: 11px; font-weight: 400; line-height: 1.5;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* ─── CAPABILITY ─── */
+    #capability {
+      padding: 100px 56px;
+      background: var(--off);
     }
 
     .capability-inner {
       max-width: 1100px; margin: 0 auto;
       display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
-      align-items: center; position: relative; z-index: 2;
+      align-items: center;
     }
 
-    .capability-left .section-title { color: var(--white); }
-    .capability-left .section-body { color: rgba(255,255,255,0.55); }
-
-    .capability-download {
+    .cap-box {
+      background: var(--navy);
+      padding: 56px 48px;
       display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      padding: 60px 40px;
-      border: 1px solid rgba(201,168,76,0.25);
-      background: rgba(255,255,255,0.03);
-      text-align: center; gap: 24px;
+      align-items: flex-start; gap: 24px;
+      position: relative; overflow: hidden;
     }
 
-    .capability-icon {
-      width: 64px; height: 64px;
-      border: 1px solid rgba(201,168,76,0.3);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
+    .cap-box::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold), transparent);
     }
 
-    .capability-icon svg { width: 28px; height: 28px; }
-
-    .capability-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 24px; font-weight: 700;
+    .cap-box-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px; letter-spacing: 2px;
       color: var(--white);
     }
 
-    .capability-desc {
-      font-size: 13px; font-weight: 300; line-height: 1.7;
+    .cap-box-desc {
+      font-size: 13px; font-weight: 300; line-height: 1.8;
       color: rgba(255,255,255,0.45);
     }
 
+    .cap-box-meta {
+      display: flex; flex-direction: column; gap: 8px; width: 100%;
+    }
+
+    .cap-meta-item {
+      display: flex; justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .cap-meta-label {
+      font-size: 10px; font-weight: 600; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--gold);
+    }
+
+    .cap-meta-value {
+      font-size: 11px; font-weight: 400; color: rgba(255,255,255,0.55);
+    }
+
     .btn-download {
-      padding: 14px 32px;
-      background: var(--gold);
-      color: var(--navy);
-      font-size: 11px; font-weight: 600; letter-spacing: 2px;
+      padding: 13px 30px;
+      background: var(--gold); color: var(--navy);
+      font-size: 11px; font-weight: 700; letter-spacing: 2px;
       text-transform: uppercase; text-decoration: none;
       border-radius: 2px; display: inline-block;
+      border: none; cursor: pointer;
       transition: background 0.2s;
-      cursor: pointer; border: none;
     }
 
     .btn-download:hover { background: var(--gold2); }
 
-    .capability-coming {
-      font-size: 10px; font-weight: 500; letter-spacing: 2px;
-      text-transform: uppercase; color: rgba(255,255,255,0.2);
-    }
-
-    /* ── CREDENTIALS ── */
-    #credentials {
-      padding: 100px 60px;
-      background: var(--white);
-      position: relative; overflow: hidden;
-    }
-
-    .credentials-inner {
-      max-width: 1100px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
-      align-items: center;
-    }
-
-    .credentials-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
-    }
-
-    .cred-item {
-      padding: 24px;
-      border: 1px solid var(--light);
-      background: var(--off);
-    }
-
-    .cred-label {
-      font-size: 10px; font-weight: 600; letter-spacing: 3px;
-      text-transform: uppercase; color: var(--gold);
-      margin-bottom: 8px;
-    }
-
-    .cred-value {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 18px; font-weight: 600;
-      color: var(--navy); line-height: 1.3;
-    }
-
-    /* ── CONTACT ── */
+    /* ─── CONTACT ─── */
     #contact {
-      padding: 120px 60px;
-      background: var(--off);
+      padding: 100px 56px;
+      background: var(--white);
     }
 
     .contact-inner {
@@ -438,474 +544,475 @@
       display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
     }
 
-    .contact-item {
-      display: flex; align-items: flex-start; gap: 16px;
-      margin-bottom: 32px;
-    }
+    .contact-info { display: flex; flex-direction: column; gap: 32px; }
 
-    .contact-icon {
-      width: 40px; height: 40px; flex-shrink: 0;
-      background: var(--white);
-      display: flex; align-items: center; justify-content: center;
-    }
-
-    .contact-icon svg { width: 18px; height: 18px; }
+    .contact-item { display: flex; flex-direction: column; gap: 4px; }
 
     .contact-label {
-      font-size: 10px; font-weight: 600; letter-spacing: 3px;
-      text-transform: uppercase; color: var(--gold); margin-bottom: 4px;
+      font-size: 9px; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--gold);
     }
 
     .contact-value {
-      font-size: 15px; font-weight: 400; color: var(--navy);
-      text-decoration: none;
+      font-size: 14px; font-weight: 400; color: var(--navy);
+      text-decoration: none; transition: color 0.2s;
     }
 
     .contact-value:hover { color: var(--gold); }
 
-    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .contact-form { display: flex; flex-direction: column; gap: 14px; }
 
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
     .form-field { display: flex; flex-direction: column; gap: 6px; }
 
     .form-field label {
-      font-size: 10px; font-weight: 600; letter-spacing: 2px;
-      text-transform: uppercase; color: var(--gray);
+      font-size: 9px; font-weight: 700; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--mid);
     }
 
     .form-field input,
     .form-field textarea {
-      padding: 14px 16px;
-      border: 1px solid var(--light);
-      background: var(--white);
+      padding: 13px 15px;
+      border: 1px solid var(--border);
+      background: var(--off);
       font-family: 'Inter', sans-serif;
       font-size: 14px; color: var(--text);
       outline: none; border-radius: 2px;
-      transition: border-color 0.2s;
-      resize: none;
+      transition: border-color 0.2s; resize: none;
     }
 
     .form-field input:focus,
-    .form-field textarea:focus {
-      border-color: var(--gold);
-    }
+    .form-field textarea:focus { border-color: var(--gold); }
 
-    .form-submit {
-      padding: 15px 36px;
-      background: var(--navy);
-      color: var(--white);
+    .btn-submit {
+      padding: 14px 32px;
+      background: var(--navy); color: var(--white);
       font-family: 'Inter', sans-serif;
-      font-size: 12px; font-weight: 600; letter-spacing: 2px;
+      font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
       text-transform: uppercase;
       border: none; border-radius: 2px; cursor: pointer;
-      transition: background 0.2s;
-      align-self: flex-start;
+      transition: background 0.2s; align-self: flex-start;
     }
 
-    .form-submit:hover { background: var(--gold); color: var(--navy); }
+    .btn-submit:hover { background: var(--gold); color: var(--navy); }
 
-    /* ── FOOTER ── */
+    /* ─── FOOTER ─── */
     footer {
       background: var(--navy);
-      padding: 40px 60px;
+      padding: 36px 56px;
       display: flex; align-items: center; justify-content: space-between;
-      border-top: 1px solid rgba(201,168,76,0.15);
+      border-top: 1px solid rgba(201,168,76,0.12);
     }
 
-    .footer-brand {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 16px; font-weight: 700;
-      color: var(--white); letter-spacing: 1px;
+    .footer-logo {
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .footer-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px; letter-spacing: 2px; color: var(--white);
     }
 
     .footer-copy {
-      font-size: 12px; color: rgba(255,255,255,0.3); letter-spacing: 1px;
+      font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 1px;
     }
 
-    .footer-gold {
-      font-size: 11px; color: var(--gold);
-      letter-spacing: 2px; text-transform: uppercase;
+    .footer-tag {
+      font-size: 10px; color: var(--gold); letter-spacing: 2px;
       font-style: italic;
     }
 
-    /* ── RESPONSIVE ── */
+    /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
       nav { padding: 0 24px; }
       .nav-links { display: none; }
-      #hero { padding: 100px 24px 140px; }
-      .hero-stats { right: 24px; bottom: 40px; gap: 28px; }
-      .hero-stat-num { font-size: 28px; }
-      #about, #services, #capability, #credentials, #contact { padding: 80px 24px; }
-      .about-inner, .capability-inner, .credentials-inner, .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-stats { display: none; }
+      .hero-content { padding: 120px 24px 80px; }
+      #mission, #about, #services, #codes, #capability, #contact { padding: 72px 24px; }
+      .mission-inner, .about-inner, .capability-inner, .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+      .mission-left { border-right: none; padding-right: 0; border-bottom: 1px solid rgba(201,168,76,0.15); padding-bottom: 40px; }
+      .services-top, .codes-top { grid-template-columns: 1fr; gap: 20px; }
       .services-grid { grid-template-columns: 1fr; }
-      footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 24px; }
+      .codes-grid { grid-template-columns: 1fr 1fr; }
+      footer { flex-direction: column; gap: 12px; text-align: center; padding: 28px 24px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-tag-dot { animation: none; }
     }
   </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
+<!-- ─── NAV ─── -->
 <nav>
   <a href="#hero" class="nav-logo">
-    <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M30 4L52 13V34C52 46 30 56 30 56C30 56 8 46 8 34V13L30 4Z" fill="#162847" stroke="#C9A84C" stroke-width="1.5"/>
-      <path d="M18 20L30 42L42 20H37L30 34L23 20H18Z" fill="#C9A84C"/>
-      <line x1="22" y1="26" x2="38" y2="26" stroke="#C9A84C" stroke-width="0.8" opacity="0.4"/>
-    </svg>
-    <div class="nav-brand">
-      <span class="nav-brand-name">VENTORO VENTURES</span>
-      <span class="nav-brand-sub">Federal Contracting · Florida</span>
+    <div class="nav-shield"><span>VV</span></div>
+    <div class="nav-wordmark">
+      <span class="nav-name">VENTORO VENTURES</span>
+      <span class="nav-sub">Federal Contracting · Florida LLC</span>
     </div>
   </a>
   <ul class="nav-links">
+    <li><a href="#mission">Mission</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
+    <li><a href="#codes">NAICS</a></li>
     <li><a href="#capability">Capability</a></li>
-    <li><a href="#credentials">Credentials</a></li>
-    <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
   </ul>
 </nav>
 
-<!-- ── HERO ── -->
+<!-- ─── HERO ─── -->
 <section id="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-glow"></div>
+  <div class="hero-video-wrap">
+    <!-- Free stock video sources: pexels.com search "freight truck highway" or "cargo logistics" -->
+    <!-- Replace src with your chosen video URL from Pexels or upload your own -->
+    <video autoplay muted loop playsinline
+      poster="https://images.pexels.com/photos/1117210/pexels-photo-1117210.jpeg">
+      <source src="https://videos.pexels.com/video-files/3576435/3576435-hd_1920_1080_25fps.mp4" type="video/mp4"/>
+    </video>
+  </div>
+  <div class="hero-overlay"></div>
+
   <div class="hero-content">
-    <div class="hero-eyebrow">
-      <div class="hero-eyebrow-line"></div>
-      <span class="hero-eyebrow-text">SAM.gov Registered Vendor · Florida</span>
+    <div class="hero-tag">
+      <div class="hero-tag-dot"></div>
+      <span class="hero-tag-text">SAM.gov Registered · Florida Small Business</span>
     </div>
-    <h1 class="hero-title">
-      Federal Contracting<br/>
-      Built on <span>Fortune &amp;<br/>Loyalty.</span>
-    </h1>
+    <h1 class="hero-title">MOVING</h1>
+    <span class="hero-title-gold">GOVERNMENT FORWARD.</span>
     <p class="hero-sub">
-      Ventoro Ventures LLC is a Florida-based small business federal contractor delivering facilities management, administrative support, and government service solutions to agencies nationwide.
+      Ventoro Ventures LLC is a Florida-based federal and state contractor — coordinating supplies, services, and logistics for government agencies across the United States.
     </p>
-    <div class="hero-actions">
-      <a href="#services" class="btn-primary">View Our Services</a>
-      <a href="#contact" class="btn-ghost">Get In Touch</a>
+    <div class="hero-btns">
+      <a href="#services" class="btn-gold">Our Services</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
     </div>
   </div>
+
   <div class="hero-stats">
     <div class="hero-stat">
-      <div class="hero-stat-num">12</div>
-      <div class="hero-stat-label">NAICS Codes</div>
+      <div class="stat-num">12</div>
+      <div class="stat-label">NAICS Codes</div>
     </div>
     <div class="hero-stat">
-      <div class="hero-stat-num">FL</div>
-      <div class="hero-stat-label">State of Formation</div>
+      <div class="stat-num">FL</div>
+      <div class="stat-label">Registered</div>
     </div>
     <div class="hero-stat">
-      <div class="hero-stat-num">SB</div>
-      <div class="hero-stat-label">Small Business</div>
+      <div class="stat-num">SB</div>
+      <div class="stat-label">Small Business</div>
     </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span class="hero-scroll-text">Scroll to explore</span>
   </div>
 </section>
 
-<!-- ── ABOUT ── -->
+<!-- ─── MISSION ─── -->
+<section id="mission">
+  <div class="mission-inner">
+    <div class="mission-left">
+      <div class="eyebrow">Mission</div>
+      <div class="mission-heading">OUR<br/><span>PURPOSE</span></div>
+    </div>
+    <p class="mission-statement">
+      Ventoro Ventures exists to <strong>bridge the gap</strong> between government agencies and the qualified professionals who serve them. We take on the complexity of contracting so agencies can focus on what they do best — and so the right people get the right work done, <strong>on time and without friction.</strong>
+    </p>
+  </div>
+</section>
+
+<!-- ─── WHO WE ARE ─── -->
 <section id="about">
   <div class="about-inner">
-    <div class="about-left">
-      <div class="section-label">Who We Are</div>
-      <h2 class="section-title">A Lean, Focused Florida Contractor</h2>
-      <p class="section-body">
-        Ventoro Ventures LLC is a registered SAM.gov vendor and Florida-based small business specializing in federal and state government contracting. We connect agency needs with qualified professionals — delivering on time, within scope, and without friction.
+    <div>
+      <div class="eyebrow" style="color:var(--gold);">Who We Are</div>
+      <h2 class="section-heading">BUILT TO<br/><span>EXECUTE.</span></h2>
+      <p class="body-text">
+        Ventoro Ventures LLC is a Florida-based small business founded by Robert Brodner and Julian Janin. We are a registered vendor on SAM.gov and MyFloridaMarketplace, specializing in connecting federal and state agency needs with qualified local subcontractors.
       </p>
-      <p class="section-body">
-        Founded by Robert Brodner and Julian Janin, Ventoro was built on a simple principle: the best government contractors execute cleanly and communicate clearly. That's what we do.
+      <p class="body-text">
+        We are the middlemen who make it work. We find the contract, source the right professionals, manage the paperwork, and deliver on time. No bureaucracy, no delays — just clean execution.
       </p>
     </div>
-    <div class="about-right">
-      <div class="about-card">
-        <div class="about-card-title">Small Business Certified</div>
-        <div class="about-card-text">Registered under SBA small business size standards across all active NAICS codes. Eligible for micro-purchase and simplified acquisition awards.</div>
+    <div class="about-cards">
+      <div class="about-item">
+        <div class="about-num">01</div>
+        <div>
+          <div class="about-item-title">Florida Based</div>
+          <div class="about-item-text">Headquartered in Jupiter, Florida. Registered with the State of Florida and operating across all 50 states to fulfill federal and state contracts anywhere they arise.</div>
+        </div>
       </div>
-      <div class="about-card">
-        <div class="about-card-title">Florida Based & Nationwide</div>
-        <div class="about-card-text">Headquartered in Jupiter, Florida. We bid on contracts statewide and nationwide, coordinating qualified local professionals wherever the work is performed.</div>
+      <div class="about-item">
+        <div class="about-num">02</div>
+        <div>
+          <div class="about-item-title">Small Business Certified</div>
+          <div class="about-item-text">Registered under SBA small business size standards. Eligible for micro-purchase awards, simplified acquisitions, and small business set-aside contracts.</div>
+        </div>
       </div>
-      <div class="about-card">
-        <div class="about-card-title">Direct & Responsive</div>
-        <div class="about-card-text">When a contracting officer reaches out, they speak directly with a founder. No layers, no delays. Fast responses and clean documentation on every contract.</div>
+      <div class="about-item">
+        <div class="about-num">03</div>
+        <div>
+          <div class="about-item-title">Founder Direct</div>
+          <div class="about-item-text">Every contracting officer speaks directly with Robert or Julian. No account managers, no middlemen on our side. Fast responses and clean documentation every time.</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── SERVICES ── -->
+<!-- ─── SERVICES ─── -->
 <section id="services">
   <div class="services-inner">
-    <div class="services-header">
-      <div class="section-label" style="justify-content:center;">What We Do</div>
-      <h2 class="section-title">Federal Service Areas</h2>
+    <div class="services-top">
+      <div>
+        <div class="eyebrow" style="color:var(--gold);">What We Do</div>
+        <h2 class="services-heading">OUR<br/><span>SERVICES</span></h2>
+      </div>
+      <p class="services-desc">Six core service areas covering facilities, administration, logistics, supply coordination, and labor — all available for federal, state, county, and local government contracts.</p>
     </div>
     <div class="services-grid">
 
-      <div class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="4" y="8" width="24" height="18" rx="1" stroke="#C9A84C" stroke-width="1.5"/>
-            <path d="M4 12h24" stroke="#C9A84C" stroke-width="1.5"/>
-            <path d="M10 16h12M10 20h8" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M12 8V6a4 4 0 018 0v2" stroke="#C9A84C" stroke-width="1.5"/>
-          </svg>
-        </div>
-        <div class="service-title">Facilities & Janitorial</div>
-        <div class="service-text">Commercial cleaning, facility maintenance, painting, carpet cleaning, and groundskeeping for federal and state buildings.</div>
-        <div class="service-naics">NAICS: 561720 · 561730 · 561210 · 561740</div>
+      <div class="svc">
+        <div class="svc-num">01</div>
+        <div class="svc-title">Facilities & Janitorial</div>
+        <div class="svc-text">Commercial cleaning, facility maintenance, carpet cleaning, painting, and groundskeeping for government buildings and installations.</div>
+        <div class="svc-codes">561720 · 561730 · 561740 · 561210</div>
       </div>
 
-      <div class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 8h20v16H6z" stroke="#C9A84C" stroke-width="1.5"/>
-            <path d="M6 12h20" stroke="#C9A84C" stroke-width="1.5"/>
-            <path d="M11 16h10M11 20h6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div class="service-title">Administrative Support</div>
-        <div class="service-text">Office administrative services, document preparation, data entry, and business support solutions for government operations.</div>
-        <div class="service-naics">NAICS: 561110 · 561410 · 561499 · 519190</div>
+      <div class="svc">
+        <div class="svc-num">02</div>
+        <div class="svc-title">Administrative Support</div>
+        <div class="svc-text">Office administrative services, document preparation, data entry, and business support for government agency operations.</div>
+        <div class="svc-codes">561110 · 561410 · 561499</div>
       </div>
 
-      <div class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="2" y="12" width="28" height="14" rx="2" stroke="#C9A84C" stroke-width="1.5"/>
-            <path d="M8 12V9a2 2 0 012-2h12a2 2 0 012 2v3" stroke="#C9A84C" stroke-width="1.5"/>
-            <path d="M10 19h12M10 23h6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div class="service-title">Logistics & Delivery</div>
-        <div class="service-text">Local freight trucking, moving services, courier delivery, and packing and crating for government relocations and deliveries.</div>
-        <div class="service-naics">NAICS: 484110 · 484210 · 492110 · 488991</div>
+      <div class="svc">
+        <div class="svc-num">03</div>
+        <div class="svc-title">Logistics & Freight</div>
+        <div class="svc-text">Local freight trucking, moving services, courier and express delivery, and packing and crating for government relocations.</div>
+        <div class="svc-codes">484110 · 492110 · 488991</div>
       </div>
 
-      <div class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 26h24M8 26V14l8-8 8 8v12" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M13 26v-6h6v6" stroke="#C9A84C" stroke-width="1.5"/>
-          </svg>
-        </div>
-        <div class="service-title">General Labor & Site</div>
-        <div class="service-text">Site preparation, general field labor, building inspection, and miscellaneous support services for federal facilities.</div>
-        <div class="service-naics">NAICS: 561990 · 238910 · 541350 · 811490</div>
+      <div class="svc">
+        <div class="svc-num">04</div>
+        <div class="svc-title">Bulk Supply & Materials</div>
+        <div class="svc-text">Agricultural materials, bulk goods, general durable supplies, and wholesale merchandise sourced and delivered to specification.</div>
+        <div class="svc-codes">423990 · 424590</div>
       </div>
 
-      <div class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 10h20l-2 14H8L6 10z" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/>
-            <path d="M4 10h24" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M12 10V8a4 4 0 018 0v2" stroke="#C9A84C" stroke-width="1.5"/>
-          </svg>
-        </div>
-        <div class="service-title">Supplies & Materials</div>
-        <div class="service-text">Bulk supply sourcing and delivery — agricultural materials, metal supply, general durable goods, and wholesale merchandise.</div>
-        <div class="service-naics">NAICS: 424590 · 423510 · 423990</div>
+      <div class="svc">
+        <div class="svc-num">05</div>
+        <div class="svc-title">General Labor & Site</div>
+        <div class="svc-text">Site preparation, general field labor, building inspection, and miscellaneous support services for federal and state facilities.</div>
+        <div class="svc-codes">561990</div>
       </div>
 
-      <div class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="16" cy="12" r="5" stroke="#C9A84C" stroke-width="1.5"/>
-            <path d="M6 26c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div class="service-title">Logistics Consulting</div>
-        <div class="service-text">Process, physical distribution, and logistics consulting services to support efficient government supply chain operations.</div>
-        <div class="service-naics">NAICS: 541614</div>
+      <div class="svc">
+        <div class="svc-num">06</div>
+        <div class="svc-title">Moving & Relocation</div>
+        <div class="svc-text">Household and office goods moving, packing, crating, and full relocation coordination for government employees and facilities.</div>
+        <div class="svc-codes">484210 · 488991</div>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- ── CAPABILITY STATEMENT ── -->
+<!-- ─── NAICS CODES ─── -->
+<section id="codes">
+  <div class="codes-inner">
+    <div class="codes-top">
+      <div>
+        <div class="eyebrow">Registered Codes</div>
+        <h2 class="codes-heading">OUR<br/><span>NAICS CODES</span></h2>
+      </div>
+      <p class="codes-desc">Ventoro Ventures is registered under 12 active NAICS codes on SAM.gov and MyFloridaMarketplace. Contracting officers can verify our registration directly through both platforms.</p>
+    </div>
+    <div class="codes-grid">
+      <div class="code-item">
+        <div class="code-num">561720</div>
+        <div class="code-desc">Janitorial Services</div>
+      </div>
+      <div class="code-item">
+        <div class="code-num">561730</div>
+        <div class="code-desc">Landscaping Services</div>
+      </div>
+      <div class="code-item">
+        <div class="code-num">561740</div>
+        <div class="code-desc">Carpet & Upholstery Cleaning</div>
+      </div>
+      <div class="code-item">
+        <div class="code-num">561210</div>
+        <div class="code-desc">Facilities Support Services</div>
+      </div>
+      <div class="code-item">
+        <div class="code-num">561990</div>
+        <div class="code-desc">All Other Support Services</div>
+      </div>
+      <div class="code-item">
+        <div class="code-num">561110</div>
+        <div class="code-desc">Office Administrative Services</div>
+      </div>
+      <div class="code-item">
+        <div class="code-num">561499</div>
+        <div class="code-desc">Business Support Services</div>
+      </div>
+      <div class="code-item">
+        <div class="code-num">484110</div>
+        <div class="code-desc">General Freight Trucking Local</div>
+      </div>
+      <div class="code-item">
+        <div class="code-num">492110</div>
+        <div class="code-desc">Couriers & Express Delivery</div>
+      </div>
+      <div class="code-item">
+        <div class="code-num">488991</div>
+        <div class="code-desc">Packing & Crating</div>
+      </div>
+      <div class="code-item">
+        <div class="code-num">423990</div>
+        <div class="code-desc">Other Durable Goods Wholesalers</div>
+      </div>
+      <div class="code-item">
+        <div class="code-num">424590</div>
+        <div class="code-desc">Agricultural & Bulk Materials</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CAPABILITY ─── -->
 <section id="capability">
-  <div class="capability-glow"></div>
   <div class="capability-inner">
-    <div class="capability-left">
-      <div class="section-label">Capability Statement</div>
-      <h2 class="section-title">Download Our Capability Statement</h2>
-      <p class="section-body">
-        Our capability statement provides contracting officers and agency representatives with a complete overview of Ventoro Ventures LLC — our core competencies, NAICS codes, SAM.gov registration, past performance, and contact information.
-      </p>
-      <p class="section-body">
-        If you are a contracting officer or procurement specialist looking to verify our qualifications or add us to your vendor list, download our capability statement below or contact us directly.
-      </p>
-    </div>
-    <div class="capability-download">
-      <div class="capability-icon">
-        <svg viewBox="0 0 32 32" fill="none" stroke="#C9A84C" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
-          <path d="M16 4v16M10 14l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M4 22v4a2 2 0 002 2h20a2 2 0 002-2v-4" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <div class="capability-title">Ventoro Ventures LLC</div>
-      <div class="capability-desc">Capability Statement · Florida Small Business · SAM.gov Registered Vendor · Federal & State Contracting</div>
-      <a href="capability-statement.pdf" class="btn-download" onclick="alert('Capability statement coming soon. Contact us directly at info@ventoroventures.com'); return false;">Download PDF</a>
-      <div class="capability-coming">PDF available upon request · info@ventoroventures.com</div>
-    </div>
-  </div>
-</section>
-
-<!-- ── CREDENTIALS ── -->
-<section id="credentials">
-  <div class="credentials-inner">
     <div>
-      <div class="section-label">Verified & Registered</div>
-      <h2 class="section-title">Our Credentials</h2>
-      <p class="section-body">
-        Ventoro Ventures LLC is fully registered on SAM.gov and MyFloridaMarketplace. Contracting officers can verify our standing directly through the System for Award Management and the State of Florida vendor portal.
-      </p>
+      <div class="eyebrow" style="color:var(--gold);">Capability Statement</div>
+      <h2 class="section-heading">DOWNLOAD<br/><span>OUR PROFILE</span></h2>
+      <p class="body-text">Our capability statement gives contracting officers a complete overview of Ventoro Ventures — core competencies, NAICS codes, registration details, and contact information in one clean document.</p>
+      <p class="body-text">Available upon request or download directly below. For immediate inquiries contact us at info@ventoroventures.com.</p>
     </div>
-    <div class="credentials-grid">
-      <div class="cred-item">
-        <div class="cred-label">Entity Name</div>
-        <div class="cred-value">Ventoro Ventures LLC</div>
+    <div class="cap-box">
+      <div class="cap-box-title">VENTORO VENTURES LLC</div>
+      <div class="cap-box-desc">Capability Statement · Florida Small Business · Federal & State Contracting</div>
+      <div class="cap-box-meta">
+        <div class="cap-meta-item">
+          <span class="cap-meta-label">Entity</span>
+          <span class="cap-meta-value">Ventoro Ventures LLC</span>
+        </div>
+        <div class="cap-meta-item">
+          <span class="cap-meta-label">State</span>
+          <span class="cap-meta-value">Florida, USA</span>
+        </div>
+        <div class="cap-meta-item">
+          <span class="cap-meta-label">SAM.gov</span>
+          <span class="cap-meta-value">Pending Activation</span>
+        </div>
+        <div class="cap-meta-item">
+          <span class="cap-meta-label">MFMP</span>
+          <span class="cap-meta-value">Active Vendor</span>
+        </div>
+        <div class="cap-meta-item">
+          <span class="cap-meta-label">Business Type</span>
+          <span class="cap-meta-value">Small Business LLC</span>
+        </div>
+        <div class="cap-meta-item">
+          <span class="cap-meta-label">NAICS Codes</span>
+          <span class="cap-meta-value">12 Active Codes</span>
+        </div>
       </div>
-      <div class="cred-item">
-        <div class="cred-label">Business Type</div>
-        <div class="cred-value">Small Business LLC</div>
-      </div>
-      <div class="cred-item">
-        <div class="cred-label">State of Formation</div>
-        <div class="cred-value">Florida, USA</div>
-      </div>
-      <div class="cred-item">
-        <div class="cred-label">SAM.gov Status</div>
-        <div class="cred-value">Pending Activation</div>
-      </div>
-      <div class="cred-item">
-        <div class="cred-label">UEI Number</div>
-        <div class="cred-value">Pending Activation</div>
-      </div>
-      <div class="cred-item">
-        <div class="cred-label">FL Vendor Status</div>
-        <div class="cred-value">Active — MFMP</div>
-      </div>
+      <button class="btn-download" onclick="alert('Capability statement available at info@ventoroventures.com')">Download PDF</button>
     </div>
   </div>
 </section>
 
-<!-- ── CONTACT ── -->
+<!-- ─── CONTACT ─── -->
 <section id="contact">
   <div class="contact-inner">
-    <div class="contact-left">
-      <div class="section-label">Reach Us</div>
-      <h2 class="section-title">Work With Ventoro Ventures</h2>
-      <p class="section-body">
-        Contracting officers, agency representatives, and potential partners can reach us directly. We respond to all inquiries within one business day.
-      </p>
-
-      <div class="contact-item">
-        <div class="contact-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 4h16v16H4zM4 8l8 5 8-5" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div>
-          <div class="contact-label">General Inquiries</div>
+    <div>
+      <div class="eyebrow" style="color:var(--gold);">Reach Us</div>
+      <h2 class="section-heading">LET'S<br/><span>WORK TOGETHER</span></h2>
+      <p class="body-text">Contracting officers, agency representatives, and potential partners — reach us directly. We respond within one business day.</p>
+      <div class="contact-info">
+        <div class="contact-item">
+          <span class="contact-label">General Inquiries</span>
           <a href="mailto:info@ventoroventures.com" class="contact-value">info@ventoroventures.com</a>
         </div>
-      </div>
-
-      <div class="contact-item">
-        <div class="contact-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 4h16v16H4zM4 8l8 5 8-5" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div>
-          <div class="contact-label">Robert Brodner — Co-Founder</div>
+        <div class="contact-item">
+          <span class="contact-label">Robert Brodner — Co-Founder</span>
           <a href="mailto:robert@ventoroventures.com" class="contact-value">robert@ventoroventures.com</a>
         </div>
-      </div>
-
-      <div class="contact-item">
-        <div class="contact-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 4h16v16H4zM4 8l8 5 8-5" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div>
-          <div class="contact-label">Julian Janin — Co-Founder</div>
+        <div class="contact-item">
+          <span class="contact-label">Julian Janin — Co-Founder</span>
           <a href="mailto:julian@ventoroventures.com" class="contact-value">julian@ventoroventures.com</a>
         </div>
-      </div>
-
-      <div class="contact-item">
-        <div class="contact-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
-            <circle cx="12" cy="9" r="2.5"/>
-          </svg>
-        </div>
-        <div>
-          <div class="contact-label">Location</div>
+        <div class="contact-item">
+          <span class="contact-label">Location</span>
           <span class="contact-value">Jupiter, Florida · Operating Nationwide</span>
         </div>
+        <div class="contact-item">
+          <span class="contact-label">Website</span>
+          <a href="https://ventoroventures.com" class="contact-value">ventoroventures.com</a>
+        </div>
       </div>
     </div>
-
-    <div class="contact-right">
-      <form class="contact-form" onsubmit="handleSubmit(event)">
-        <div class="form-row">
-          <div class="form-field">
-            <label>First Name</label>
-            <input type="text" placeholder="John"/>
-          </div>
-          <div class="form-field">
-            <label>Last Name</label>
-            <input type="text" placeholder="Smith"/>
-          </div>
+    <form class="contact-form" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-field">
+          <label>First Name</label>
+          <input type="text" placeholder="John"/>
         </div>
         <div class="form-field">
-          <label>Email Address</label>
-          <input type="email" placeholder="john.smith@agency.gov"/>
+          <label>Last Name</label>
+          <input type="text" placeholder="Smith"/>
         </div>
-        <div class="form-field">
-          <label>Agency / Organization</label>
-          <input type="text" placeholder="e.g. GSA, VA, USDA, State of Florida"/>
-        </div>
-        <div class="form-field">
-          <label>Message</label>
-          <textarea rows="5" placeholder="Tell us about your contracting need..."></textarea>
-        </div>
-        <button type="submit" class="form-submit">Send Message</button>
-      </form>
-    </div>
+      </div>
+      <div class="form-field">
+        <label>Email</label>
+        <input type="email" placeholder="john.smith@agency.gov"/>
+      </div>
+      <div class="form-field">
+        <label>Agency or Organization</label>
+        <input type="text" placeholder="e.g. GSA, VA, USDA, State of Florida"/>
+      </div>
+      <div class="form-field">
+        <label>Message</label>
+        <textarea rows="5" placeholder="Tell us about your contracting need..."></textarea>
+      </div>
+      <button type="submit" class="btn-submit">Send Message</button>
+    </form>
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
+<!-- ─── FOOTER ─── -->
 <footer>
-  <div class="footer-brand">VENTORO VENTURES LLC</div>
-  <div class="footer-gold">Fortune · Fortune · Loyalty</div>
-  <div class="footer-copy">© 2026 Ventoro Ventures LLC · Jupiter, Florida · All Rights Reserved</div>
+  <div class="footer-logo">
+    <div class="nav-shield" style="width:28px;height:28px;"><span style="font-size:11px;">VV</span></div>
+    <span class="footer-name">VENTORO VENTURES LLC</span>
+  </div>
+  <span class="footer-tag">Fortune · Loyalty · Execution</span>
+  <span class="footer-copy">© 2026 Ventoro Ventures LLC · Jupiter, Florida</span>
 </footer>
 
 <script>
+  // Nav active state
   const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
-
+  const navLinks = document.querySelectorAll('.nav-links a:not(.nav-cta)');
   window.addEventListener('scroll', () => {
     let current = '';
-    sections.forEach(s => {
-      if (window.scrollY >= s.offsetTop - 100) current = s.id;
-    });
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
     navLinks.forEach(a => {
       a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold)' : '';
     });
   });
 
+  // Form submit
   function handleSubmit(e) {
     e.preventDefault();
-    const btn = e.target.querySelector('.form-submit');
+    const btn = e.target.querySelector('.btn-submit');
     btn.textContent = 'Message Sent ✓';
     btn.style.background = '#1A7A4A';
     btn.style.color = '#fff';
