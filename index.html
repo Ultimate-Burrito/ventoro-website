@@ -224,10 +224,23 @@ body{background:var(--ink);color:var(--paper);font-family:'Inter',sans-serif;ove
 
 /* ── VV-0003 ABOUT dark ── */
 #about{
-  position:relative;background:var(--ink);
+  position:relative;
   padding:120px 56px;
+  overflow:hidden;
 }
-.about-inner{max-width:1100px;margin:0 auto;display:flex;gap:48px;}
+#about::before{
+  content:'';
+  position:absolute;inset:0;z-index:0;
+  background-image:url('flag.webp');
+  background-size:cover;background-position:center;
+  opacity:0.12;
+}
+#about::after{
+  content:'';
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(10,13,16,0.85) 0%,rgba(10,13,16,0.80) 100%);
+}
+.about-inner{max-width:1100px;margin:0 auto;display:flex;gap:48px;position:relative;z-index:2;}
 .about-body{flex:1;}
 .about-h{
   font-family:'Archivo',sans-serif;font-weight:700;
@@ -473,7 +486,7 @@ footer{
 
 <!-- ── WHO WE ARE VV-0003 dark ── -->
 <section id="about">
-  <div class="manifest">
+  <div class="manifest" style="z-index:3;">
     <span class="code">DOC // VV-0003</span>
     <div class="sub">CLASS: CORPORATE PROFILE</div>
   </div>
